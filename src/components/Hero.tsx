@@ -51,8 +51,8 @@ const Hero = () => {
       <div className="absolute bottom-20 right-10 w-20 h-20 border-4 border-red-500 rounded-full opacity-50 animate-float" style={{ animationDelay: '1s' }}></div>
       <div className="absolute top-1/2 right-20 w-12 h-12 bg-red-500 rounded-full opacity-60 animate-float" style={{ animationDelay: '2s' }}></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-7xl mx-auto">
+      {/* Content with fade-in animation */}
+      <div className="relative z-10 text-center px-4 max-w-7xl mx-auto animate-fade-in">
         <div className="mb-6">
           <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4 tracking-tight">
             ANARGHYA
@@ -65,7 +65,7 @@ const Hero = () => {
           </p>
         </div>
         
-        {/* Responsive Timer: 2 columns on mobile, 4 on md and up */}
+        {/* Responsive Timer */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 max-w-4xl mx-auto">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 md:p-6 transform hover:scale-105 transition-all duration-300">
             <div className="text-4xl md:text-5xl font-bold text-white mb-2">{timeLeft.days}</div>
@@ -87,7 +87,7 @@ const Hero = () => {
 
         <button 
           onClick={scrollToCompetitions}
-          className="bg-red-500 text-white px-8 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-bold hover:bg-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+          className="bg-red-500 text-white px-8 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-bold hover:bg-red-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:animate-pulse"
         >
           Register Now
         </button>
@@ -96,8 +96,8 @@ const Hero = () => {
       {/* Decorative elements */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-gray-50 to-transparent z-20"></div>
 
-      {/* Floating animation styles */}
-      <style jsx>{`
+      {/* Animation styles */}
+      <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-20px); }
@@ -113,6 +113,21 @@ const Hero = () => {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
+        }
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 1.5s ease forwards;
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+        .hover\\:animate-pulse:hover {
+          animation: pulse 1s ease-in-out infinite;
         }
       `}</style>
     </div>

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 const competitions = [
   {
     title: 'Poster Presentation',
@@ -46,7 +48,19 @@ const competitions = [
     description: 'Test your cybersecurity skills in this Capture The Flag competition.',
     image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80',
     group: 'https://chat.whatsapp.com/ctf-group'
-  }
+  },
+  {
+    title: 'Face Painting',
+    description: 'A creative contest where teams of 2 transform faces into vibrant canvases with innovative designs.',
+    image: 'https://images.pexels.com/photos/1388534/pexels-photo-1388534.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    group: 'https://chat.whatsapp.com/ctf-group'
+  },
+  {
+    title: 'Soap Crafting',
+    description: 'A creative contest where you craft unique, artisanal soaps by blending colors, scents, and textures into delightful masterpieces.',
+    image: 'https://houseoftomorrow.net/wp-content/uploads/2021/01/variety-soaps.jpg',
+    group: 'https://chat.whatsapp.com/ctf-group'
+  },
 ];
 
 interface CompetitionCardProps {
@@ -56,8 +70,30 @@ interface CompetitionCardProps {
   group: string;
 }
 
+const cardVariants = {
+  offscreen: {
+    y: 0,
+    opacity: 0
+  },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "ease",
+      bounce: 0.4,
+      duration: 2
+    }
+  }
+};
+
 const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, image, group }) => (
-  <div className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300">
+  <motion.div
+    className="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300"
+    initial="offscreen"
+    whileInView="onscreen"
+    viewport={{ once: true, amount: 0.2 }}
+    variants={cardVariants}
+  >
     <div className="h-64 overflow-hidden">
       <img 
         src={image} 
@@ -77,7 +113,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, i
         Join Now
       </a>
     </div>
-  </div>
+  </motion.div>
 );
 
 const Competitions = () => {
@@ -85,10 +121,24 @@ const Competitions = () => {
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Competitions</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-4xl font-bold text-gray-900 mb-4"
+          >
+            Competitions
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-xl text-gray-600 max-w-2xl mx-auto"
+          >
             Showcase your skills and compete in our diverse range of technical competitions
-          </p>
+          </motion.p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
