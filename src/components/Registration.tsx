@@ -22,7 +22,7 @@ const Registration = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Registration</h2>
           <p className="text-xl text-gray-600">
-            Register now to participate in Anarghya 2023
+            Register now to participate in Anarghya 2025
           </p>
         </div>
 

@@ -3,8 +3,8 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'When and where is Anarghya 2023 taking place?',
-    answer: 'Anarghya 2023 will be held at Synergy Institute of Engineering and Technology, Dhenkanal. The event dates and detailed schedule will be announced soon.'
+    question: 'When and where is Anarghya 2025 taking place?',
+    answer: 'Anarghya 2025 will be held at Synergy Institute of Engineering and Technology, Dhenkanal. The event dates and detailed schedule will be announced soon.'
   },
   {
     question: 'Who can participate in the competitions?',
@@ -37,7 +37,7 @@ const FAQ = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
           <p className="text-xl text-gray-600">
-            Find answers to common questions about Anarghya 2023
+            Find answers to common questions about Anarghya 2025
           </p>
         </div>
 
