@@ -15,8 +15,8 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Schedule />
         <Competitions />
+        <Schedule />
         <Venue />
         <Contact />
         <FAQ />
