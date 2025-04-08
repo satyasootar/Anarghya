@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 const competitions = [
   {
@@ -12,63 +12,63 @@ const competitions = [
     title: 'Error Correction',
     description: 'Test your programming skills by solving complex coding challenges and debugging problems.',
     image: '/images/ErrorCorrection.jpg',
-    group: 'https://chat.whatsapp.com/coding-group',
+    group: 'https://chat.whatsapp.com/KJkSTcvYUCIHX7RvMPBiUb',
     registration: 'https://forms.gle/error-correction-registration'
   },
   {
     title: 'Technical Quiz',
     description: 'Put your technical knowledge to the test in this comprehensive quiz competition.',
     image: '/images/TechQuiz.jpg',
-    group: 'https://chat.whatsapp.com/quiz-group',
+    group: 'https://chat.whatsapp.com/GswvoP8F8yE6lOpSjR5idT',
     registration: 'https://forms.gle/technical-quiz-registration'
   },
   {
     title: 'Poster Presentation',
     description: 'Showcase your creativity and technical knowledge through poster presentations in association with ISTE Synergy Chapter.',
     image: "/images/Poster_Painting.jpeg",
-    group: 'https://chat.whatsapp.com/poster-group',
+    group: 'https://chat.whatsapp.com/KgTd3ufmYZjFUMe3mTef9N',
     registration: 'https://forms.gle/poster-registration'
   },
   {
     title: 'Blind Fold Typing',
     description: 'Show off your typing speed and accuracy while blindfolded in this unique challenge.',
     image: '/images/BlindFoldTyping.jpg',
-    group: 'https://chat.whatsapp.com/typing-group',
+    group: 'https://chat.whatsapp.com/KxdNpR0jJ46Jzia1GsWLPV ',
     registration: 'https://forms.gle/blind-fold-typing-registration'
   },
   {
     title: 'Brain Mapping',
     description: 'Challenge your memory and cognitive skills in this exciting brain training competition.',
     image: '/images/BrainMapping.jpg',
-    group: 'https://chat.whatsapp.com/brain-group',
+    group: 'https://chat.whatsapp.com/LsbuPNl4Cc123fR1rbROZa',
     registration: 'https://forms.gle/brain-mapping-registration'
   },
   {
     title: 'Paper Presentation',
     description: 'Present your research on latest technologies and innovations, organized with ISTE Synergy Chapter.',
     image: '/images/PaperPresentation.jpg',
-    group: 'https://chat.whatsapp.com/paper-group',
+    group: 'https://chat.whatsapp.com/DqFQ7mKsKoP7TD8NQKXhMs',
     registration: 'https://forms.gle/paper-presentation-registration'
   },
   {
     title: 'Short Film Making',
     description: 'Create compelling short films about campus life for institute social media.',
     image: '/images/ShortFilmMaking.jpg',
-    group: 'https://chat.whatsapp.com/film-group',
+    group: 'https://chat.whatsapp.com/ImqmcujP4wh2j7cgjgWk0p ',
     registration: 'https://forms.gle/short-film-registration'
   },
   {
     title: 'Face Painting',
     description: 'A creative contest where teams of 2 transform faces into vibrant canvases with innovative designs.',
     image: '/images/FacePainting.jpg',
-    group: 'https://chat.whatsapp.com/face-painting-group',
+    group: 'https://chat.whatsapp.com/K1P7DijP9746bT2eqD5vVo ',
     registration: 'https://forms.gle/face-painting-registration'
   },
   {
     title: 'Soap Crafting',
     description: 'A creative contest where you craft unique, artisanal soaps by blending colors, scents, and textures into delightful masterpieces.',
     image: '/images/SoapCrafting.jpg',
-    group: 'https://chat.whatsapp.com/soap-crafting-group',
+    group: 'https://chat.whatsapp.com/Ju71p8y3q7pIb430eoHC5N ',
     registration: 'https://forms.gle/soap-crafting-registration'
   }
 ];
@@ -81,22 +81,8 @@ interface CompetitionCardProps {
   registration: string;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { duration: 0.5, ease: "easeInOut" }
-  }
-};
-
 const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, image, group, registration }) => (
-  <motion.div
-    className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true, amount: 0.1 }}
-    variants={cardVariants}
-  >
+  <div className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
     <div className="relative aspect-video overflow-hidden">
       <img 
         src={image}
@@ -116,7 +102,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, i
       </p>
       
       <div className="flex flex-col gap-3">
-      <a 
+        <a 
           href={registration}
           target="_blank"
           rel="noopener noreferrer"
@@ -140,27 +126,21 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, i
         </a>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
 const Competitions = () => {
   return (
     <section className="py-16 bg-gray-50" id="competitions">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">
             Featured Competitions
           </h2>
           <p className="text-gray-600 text-lg max-w-xl mx-auto">
             Showcase your technical prowess in our premier events
           </p>
-        </motion.div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {competitions.map((competition, index) => (
