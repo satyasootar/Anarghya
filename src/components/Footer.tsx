@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Facebook, Instagram, Twitter, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
             <h3 className="text-xl font-semibold text-white mb-4">Contact Us</h3>
             <p className="mb-2">Synergy Institute of Engineering and Technology</p>
             <p className="mb-2">Dhenkanal, Odisha</p>
-            <p>Email: anarghya2025@synergy.ac.in</p>
+            <p>Email: sietdkl@synergyinstitute.net</p>
           </div>
 
           {/* Quick Links */}
@@ -29,7 +29,7 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold text-white mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://www.facebook.com/synergygroupofinstitutions" className="hover:text-white transition-colors">
                 <Facebook size={24} />
               </a>
               <a href="#" className="hover:text-white transition-colors">

@@ -23,16 +23,6 @@ const titleVariants: Variants = {
   })
 };
 
-const scrollIndicatorVariants: Variants = {
-  animate: {
-    y: [0, 20, 0],
-    transition: {
-      repeat: Infinity,
-      duration: 2,
-      ease: "easeInOut"
-    }
-  }
-};
 
 // Updated slide variants for horizontal carousel with no opacity change
 const slideVariants: Variants = {
@@ -81,10 +71,6 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, [updateTimer]);
 
-  const scrollToCompetitions = () => {
-    const element = document.getElementById('competitions');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <motion.div 
@@ -214,26 +200,17 @@ const Hero = () => {
         </motion.div>
 
         {/* Register Button */}
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVC9NmY7koypjx-3yyLHMS6sVWMHeNW4bzBlOVdtOP-BsOOA/viewform">
         <motion.button
-          onClick={scrollToCompetitions}
           className="bg-red-600 text-white px-8 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-red-700 transition-colors relative overflow-hidden"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <span className="relative z-10">Register Now</span>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 hover:opacity-100 transition-opacity" />
-        </motion.button>
-      </motion.div>
+        </motion.button>    
+        </a>
 
-      {/* Scrolling Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
-        variants={scrollIndicatorVariants}
-        animate="animate"
-      >
-        <div className="w-8 h-12 border-4 border-white/30 rounded-full">
-          <div className="w-2 h-2 bg-white/50 rounded-full mt-2 mx-auto" />
-        </div>
       </motion.div>
     </motion.div>
   );
