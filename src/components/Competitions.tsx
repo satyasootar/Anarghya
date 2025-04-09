@@ -81,7 +81,7 @@ interface CompetitionCardProps {
   registration: string;
 }
 
-const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, image, group, registration }) => (
+const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, image, group }) => (
   <div className="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
     <div className="relative aspect-video overflow-hidden">
       <img 
@@ -102,7 +102,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, i
       </p>
       
       <div className="flex flex-col gap-3">
-        <a 
+        {/* <a 
           href={registration}
           target="_blank"
           rel="noopener noreferrer"
@@ -112,7 +112,7 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({ title, description, i
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm8-6.2V12h2v1.8h-2zm-3.5-1.8c0 .4-.3.7-.7.7h-1.4v1.4h-.7V12h2.1c.4 0 .7.3.7.7v.7zm-1.4 0h.7v-.7h-.7v.7zm4.9 1.5h-2.8v-1.5h2.8v1.5z"/>
           </svg>
           Register Now
-        </a>
+        </a> */}
         <a 
           href={group}
           target="_blank"

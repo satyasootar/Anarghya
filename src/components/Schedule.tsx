@@ -30,7 +30,7 @@ const scheduleData = [
       },
       {
         time: 'Before 5:00 PM',
-        title: 'Video Editing Submission'
+        title: 'Short Film Submission'
       }
     ]
   },
@@ -39,7 +39,7 @@ const scheduleData = [
     events: [
       {
         time: '3:30 PM - 5:00 PM',
-        title: 'Tech Quiz'
+        title: 'Technical Quiz'
       }
     ]
   },
@@ -55,7 +55,7 @@ const scheduleData = [
         title: 'Soap Craft'
       },
       {
-        time: '2:20 PM - 4:00 PM',
+        time: '2:30 PM - 4:00 PM',
         title: 'Paper Presentation'
       },
       {
