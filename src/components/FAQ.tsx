@@ -4,7 +4,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 const faqs = [
   {
     question: 'When and where is Anarghya 2025 taking place?',
-    answer: 'Anarghya 2025 will be held at Synergy Institute of Engineering and Technology, Dhenkanal. The event dates and detailed schedule will be announced soon.'
+    answer: 'Anarghya 2025 will be held at Synergy Institute of Engineering and Technology, Dhenkanal.'
   },
   {
     question: 'Who can participate in the competitions?',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: 'How can I join the competition WhatsApp groups?',
-    answer: 'After registration, you will receive WhatsApp group links for your selected competitions. You can also find the links on our competitions page.'
+    answer: 'You can find the link on the Google Registration form, On clicking the button you will get the whatsapp invitation'
   }
 ];
 

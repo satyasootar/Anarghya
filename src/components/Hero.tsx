@@ -45,7 +45,7 @@ const Hero = () => {
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
 
-  const eventDate = new Date('2025-04-16T09:00:00').getTime();
+  const eventDate = new Date('2025-04-16T10:00:00').getTime();
 
   // Image carousel effect with horizontal sliding
   useEffect(() => {
@@ -100,34 +100,6 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* Floating elements */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute pointer-events-none bg-white/10"
-          style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
-            width: `${Math.random() * 40 + 20}px`,
-            height: `${Math.random() * 40 + 20}px`,
-            borderRadius: Math.random() > 0.5 ? '50%' : '20%'
-          }}
-          animate={{
-            y: [0, -40, 0],
-            rotate: [0, 360],
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{
-            duration: Math.random() * 4 + 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: Math.random() * 2
-          }}
-          initial={false}
-        />
-      ))}
-
       {/* Main content */}
       <motion.div 
         className="relative z-10 text-center px-4 max-w-7xl mx-auto"
@@ -138,6 +110,9 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
         >
+          <div className='flex justify-center lg:mt-[80px]' >
+          <img src="/images/societylogo.jpg" className='h-16' alt="" />
+          </div>
           <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4 tracking-tighter">
             {'ANARGHYA'.split('').map((letter, i) => (
               <motion.span
@@ -202,7 +177,7 @@ const Hero = () => {
         {/* Register Button */}
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVC9NmY7koypjx-3yyLHMS6sVWMHeNW4bzBlOVdtOP-BsOOA/viewform">
         <motion.button
-          className="bg-red-600 text-white px-8 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-red-700 transition-colors relative overflow-hidden"
+          className="bg-red-600 text-white px-1 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-red-700 transition-colors relative overflow-hidden"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >

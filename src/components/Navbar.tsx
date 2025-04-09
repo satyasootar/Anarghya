@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <a href="#home" className="flex items-center">
               <img 
-                src="/images/logo.png" 
+                src="/images/logo2.png" 
                 alt="Anarghya Logo"
                 className="h-16 w-auto object-contain hover:scale-105 transition-transform"
               />

@@ -1,5 +1,5 @@
 
-import { Facebook, Instagram, Twitter, Linkedin, Mail } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -11,7 +11,7 @@ const Footer = () => {
             <h3 className="text-xl font-semibold text-white mb-4">Contact Us</h3>
             <p className="mb-2">Synergy Institute of Engineering and Technology</p>
             <p className="mb-2">Dhenkanal, Odisha</p>
-            <p>Email: sietdkl@synergyinstitute.net</p>
+            <p>Email: hodcse@synergyinstitute.net</p>
           </div>
 
           {/* Quick Links */}
@@ -32,16 +32,16 @@ const Footer = () => {
               <a href="https://www.facebook.com/synergygroupofinstitutions" className="hover:text-white transition-colors">
                 <Facebook size={24} />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              <a href="https://www.instagram.com/synergygroupofinstitutions/" className="hover:text-white transition-colors">
                 <Instagram size={24} />
               </a>
-              <a href="#" className="hover:text-white transition-colors">
+              {/* <a href="#" className="hover:text-white transition-colors">
                 <Twitter size={24} />
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
+              </a> */}
+              <a href="https://www.linkedin.com/school/synergy-institute-of-engineering-and-technology-siet-dhenkanal/" className="hover:text-white transition-colors">
                 <Linkedin size={24} />
               </a>
-              <a href="mailto:anarghya2025@synergy.ac.in" className="hover:text-white transition-colors">
+              <a href="mailto:hodcse@synergyinstitute.net" className="hover:text-white transition-colors">
                 <Mail size={24} />
               </a>
             </div>
