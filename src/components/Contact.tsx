@@ -1,63 +1,13 @@
 import React from 'react';
+import { eventData } from '../data/eventData';
 
-const volunteers = {
-  FirstYear: [
-    { name: 'Jasmin Rout', phone: '+91 96926 73617' },
-    { name: 'Jasmita Sahoo', phone: '+91 63705 58868' },
-    { name: 'Kishan Kumar Sahoo', phone: '+91 97760 58560' },
-    { name: 'Debiprasad Sahu', phone: '+91 77498 15007' },
-    { name: 'Priyanka Priyadarshini Sahu', phone: '+91 94375 49653' },
-    { name: 'Sambit Kumar Sahoo', phone: '+91 63709 57857' },
-    { name: 'Ankita Parida', phone: '+91 77356 13366' },
-    { name: 'Asutosh Sahu', phone: '+91 79780 88266' },
-    { name: 'Arpita Jena', phone: '+91 98776 16724' },
-    { name: 'Satyajeet Rout', phone: '+91 96687 98173' },
-    { name: 'Snigdhha Mishra', phone: '+91 81446 50829' }
-  ],
-  SecondYear: [
-    { name: 'Trisha Mohanty', phone: '+91 77500 45036' },
-    { name: 'Suhani Satapathy', phone: '+91 81447 32588' },
-    { name: 'Pankti Prajwolika', phone: '+91 63718 96405' },
-    { name: 'Madhusmita Samal', phone: '+91 78489 98028' },
-    { name: 'Shreya Nayak', phone: '+91 70770 04759' },
-    { name: 'Nafisha Khatun', phone: '+91 79786 77080' },
-    { name: 'Jagadish Tripathy', phone: '+91 76810 00901' },
-    { name: 'Soumya Ranjan Sahoo', phone: '+91 93370 54909' },
-    { name: 'Satya Prangya Sootar', phone: '+91 63718 53969' },
-    { name: 'Rahul Kumar Parida', phone: '+91 73280 58273' },
-    { name: 'Hitesh Garnayak', phone: '+91 78489 40491' },
-    { name: 'P.Swyom Sanjog', phone: '+91 80180 72417' },
-    { name: 'ShriKrishna Moharana', phone: '+91 77888 29500' },
-    { name: 'Smruti Saurav Nayak', phone: '+91 99374 32965' }
-  ],
-  ThirdYear: [
-    { name: 'Ashit Kumar Jena', phone: '+91 70087 19268' },
-    { name: 'Gyana Rajan Behera', phone: '+91 70085 84414' },
-    { name: 'Sandeep Sahoo', phone: '+91 80931 22870' },
-    { name: 'Swarupa Behera', phone: '+91 89846 93851' },
-    { name: 'Swetashree Priyadarshini', phone: '+91 82608 62840' },
-    { name: 'Ananya Sahu', phone: '+91 86372 93095' },
-    { name: 'Suchismita Roul', phone: '+91 80184 71075' },
-    { name: 'Kuldeep Sahoo', phone: '+91 91788 29225' }
-  ],
-  FourthYear: [
-    { name: 'Somesh Som Pattnaik', phone: '+91 79787 63263' },
-    { name: 'Smruti Smaranika Mishra', phone: '+91 78539 80850' },
-    { name: 'Amar Jyoti Rana', phone: '+91 90907 15943' },
-    { name: 'Akankshya Acharya', phone: '+91 76810 26225' },
-    { name: 'Barsharani Parida', phone: '+91 63725 78288' },
-    { name: 'Kanha Sahoo', phone: '+91 70084 38961' },
-    { name: 'Himanshu Kumar Sahoo', phone: '+91 89845 16419' },
-    { name: 'Kunal Kumar Bhola', phone: '+91 63716 40025' },
-    { name: 'Ira Pradhan', phone: '+91 90786 65525' }
-  ]
-};
+type VolunteerYear = keyof typeof eventData.volunteers;
 
 const Contact = () => {
-  const [activeYear, setActiveYear] = React.useState('FourthYear');
+  const [activeYear, setActiveYear] = React.useState<VolunteerYear>('FourthYear');
   const [searchQuery, setSearchQuery] = React.useState('');
 
-  const filteredVolunteers = volunteers[activeYear].filter(volunteer =>
+  const filteredVolunteers = eventData.volunteers[activeYear].filter(volunteer =>
     volunteer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     volunteer.phone.includes(searchQuery)
   );
@@ -74,7 +24,7 @@ const Contact = () => {
 
         {/* Year Selection Tabs */}
         <div className="flex flex-wrap gap-3 mb-8 justify-center">
-          {Object.keys(volunteers).map((year) => (
+          {(Object.keys(eventData.volunteers) as VolunteerYear[]).map((year) => (
             <button
               key={year}
               onClick={() => setActiveYear(year)}
@@ -101,7 +51,7 @@ const Contact = () => {
 
         {/* Volunteers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredVolunteers.map((volunteer:string, index:number) => (
+          {filteredVolunteers.map((volunteer, index) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
