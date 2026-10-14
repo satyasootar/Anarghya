@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { eventData } from '../data/eventData';
 
 const Registration = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ const Registration = () => {
     e.preventDefault();
     // Here you would typically handle the form submission
     // For now, we'll redirect to a Google Form
-    window.open('https://forms.google.com/your-form-url', '_blank');
+    window.open(eventData.registrationUrl, '_blank');
   };
 
   return (
@@ -22,7 +23,7 @@ const Registration = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Registration</h2>
           <p className="text-xl text-gray-600">
-            Register now to participate in Anarghya 2025
+            Register now to participate in {eventData.name} {eventData.year}
           </p>
         </div>
 
@@ -95,14 +96,11 @@ const Registration = () => {
               required
             >
               <option value="">Select a competition</option>
-              <option value="poster">Poster Presentation</option>
-              <option value="error">Error Correction</option>
-              <option value="paper">Paper Presentation</option>
-              <option value="quiz">Technical Quiz</option>
-              <option value="brain">Brain Mapping</option>
-              <option value="typing">Blind Fold Typing</option>
-              <option value="film">Short Film Making</option>
-              <option value="ctf">CTF</option>
+              {eventData.registration.competitions.map((competition) => (
+                <option key={competition.value} value={competition.value}>
+                  {competition.label}
+                </option>
+              ))}
             </select>
           </div>
 

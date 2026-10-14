@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { eventData } from '../data/eventData';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,12 +13,12 @@ const Navbar = () => {
           <div className="flex items-center">
             <a href="#home" className="flex items-center">
               <img 
-                src="/images/logo2.png" 
+                src="/anarghyaimages/logo2.png"
                 alt="Anarghya Logo"
                 className="h-16 w-auto object-contain hover:scale-105 transition-transform"
               />
               <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
-                Anarghya 2025
+                {eventData.name} {eventData.year}
               </span>
             </a>
           </div>
@@ -37,7 +38,7 @@ const Navbar = () => {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all group-hover:w-full"></span>
             </a>
             <a 
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdVC9NmY7koypjx-3yyLHMS6sVWMHeNW4bzBlOVdtOP-BsOOA/viewform"
+              href={eventData.registrationUrl}
               className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors font-semibold shadow-lg hover:shadow-red-200"
             >
               Register
@@ -63,7 +64,7 @@ const Navbar = () => {
               <a href="#venue" onClick={()=>setIsOpen(false)} className="text-gray-700 hover:text-red-600 transition-colors font-medium py-2">Venue</a>
               <a href="#contact" onClick={()=>setIsOpen(false)} className="text-gray-700 hover:text-red-600 transition-colors font-medium py-2">Contact</a>
               <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdVC9NmY7koypjx-3yyLHMS6sVWMHeNW4bzBlOVdtOP-BsOOA/viewform"
+                href={eventData.registrationUrl}
                 className="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 transition-colors font-semibold text-center mt-4"
               >
                 Register Now

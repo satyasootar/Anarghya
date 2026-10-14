@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform, Variants, AnimatePresence } from 'framer-motion';
+import { eventData } from '../data/eventData';
 
 const images = [
   'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920',
@@ -31,6 +32,8 @@ const slideVariants: Variants = {
   exit: { x: '100%' }
 };
 
+const eventDate = new Date(eventData.eventDate).getTime();
+
 const Hero = () => {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -44,8 +47,6 @@ const Hero = () => {
   const y = useTransform(scrollY, [0, 300], [0, -100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.95]);
-
-  const eventDate = new Date('2025-04-16T10:00:00').getTime();
 
   // Image carousel effect with horizontal sliding
   useEffect(() => {
@@ -111,7 +112,7 @@ const Hero = () => {
           animate="visible"
         >
           <div className='flex justify-center lg:mt-[80px]' >
-          <img src="/images/societylogo.jpg" className='h-16' alt="" />
+          <img src="/anarghyaimages/societylogo.jpg" className='h-16' alt="" />
           </div>
           <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-4 tracking-tighter">
             {'ANARGHYA'.split('').map((letter, i) => (
@@ -138,7 +139,7 @@ const Hero = () => {
                 backgroundSize: '200% 200%'
               }}
             >
-              2025
+              {eventData.year}
             </motion.span>
           </h1>
           
@@ -175,7 +176,7 @@ const Hero = () => {
         </motion.div>
 
         {/* Register Button */}
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVC9NmY7koypjx-3yyLHMS6sVWMHeNW4bzBlOVdtOP-BsOOA/viewform">
+        <a href={eventData.registrationUrl}>
         <motion.button
           className="bg-red-600 text-white px-1 py-3 md:px-12 md:py-4 rounded-full text-lg md:text-xl font-semibold hover:bg-red-700 transition-colors relative overflow-hidden"
           whileHover={{ scale: 1.05 }}

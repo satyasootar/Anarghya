@@ -1,146 +1,101 @@
-const scheduleData = [
-  {
-    date: 'April 16 2025',
-    events: [
-      {
-        time: '2:00 PM - 4:30 PM',
-        title: 'Orientation for CTF'
-      }
-    ]
-  },
-  {
-    date: 'April 17 2025',
-    events: [
-      {
-        time: '9:00 AM - 4:30 PM',
-        title: 'Capture The Flag'
-      }
-    ]
-  },
-  {
-    date: 'April 19 2025',
-    events: [
-      {
-        time: '3:30 PM - 4:30 PM',
-        title: 'Error Correction'
-      },
-      {
-        time: '4:30 PM - 5:00 PM',
-        title: 'Brain Mapping'
-      },
-      {
-        time: 'Before 5:00 PM',
-        title: 'Short Film Submission'
-      }
-    ]
-  },
-  {
-    date: 'April 21 2025',
-    events: [
-      {
-        time: '3:30 PM - 5:00 PM',
-        title: 'Technical Quiz'
-      }
-    ]
-  },
-  {
-    date: 'April 22 2025',
-    events: [
-      {
-        time: '10:00 AM - 11:00 AM',
-        title: 'Blind Fold Typing'
-      },
-      {
-        time: '11:00 AM - 1:00 PM',
-        title: 'Soap Craft'
-      },
-      {
-        time: '2:30 PM - 4:00 PM',
-        title: 'Paper Presentation'
-      },
-      {
-        time: '3:30 PM - 5:00 PM',
-        title: 'Face Painting'
-      }
-    ]
-  }
-];
+import { CalendarDays, Clock3, MapPin } from 'lucide-react';
+import { eventData } from '../data/eventData';
 
-const Schedule = () => {
-  return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white" id="schedule">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-3 bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Event Schedule
-          </h2>
-          <p className="text-xl text-gray-600">April 16-22, 2025 - Technical & Creative Events</p>
+type ScheduleEvent = {
+  date: string;
+  time: string;
+  title: string;
+  venue: string;
+};
+
+const scheduleData = eventData.events
+  .filter((event) => event.date && event.time)
+  .map((event): ScheduleEvent => ({
+    date: event.date,
+    time: event.time,
+    title: event.title,
+    venue: event.venue
+  }))
+  .reduce<Array<{ date: string; events: ScheduleEvent[] }>>((days, event) => {
+    const day = days.find((item) => item.date === event.date);
+
+    if (day) {
+      day.events.push(event);
+    } else {
+      days.push({ date: event.date, events: [event] });
+    }
+
+    return days;
+  }, [])
+  .sort((firstDay, secondDay) => Date.parse(firstDay.date) - Date.parse(secondDay.date));
+
+const Schedule = () => (
+  <section className="bg-slate-50 py-20" id="schedule">
+    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <div className="mb-12 flex flex-col gap-5 border-b border-slate-200 pb-8 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <div className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-red-600">
+            <CalendarDays className="h-4 w-4" aria-hidden="true" />
+            Plan your visit
+          </div>
+          <h2 className="text-4xl font-bold tracking-tight text-slate-900">Event Schedule</h2>
+          <p className="mt-3 max-w-xl text-base leading-7 text-slate-600">
+            {eventData.scheduleDateRange} · Technical and creative events
+          </p>
         </div>
+        <div className="w-fit rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+          {scheduleData.length} event days
+        </div>
+      </div>
 
-        <div className="flex flex-col gap-8 lg:gap-12">
-          {scheduleData.map((day, dayIndex) => (
-            <div key={dayIndex} className="relative group">
-              {/* Timeline line */}
-              <div className="absolute left-8 top-10 bottom-10 w-1 bg-gradient-to-b from-blue-200 to-purple-200 hidden lg:block" />
-              
-              <div className="relative z-10 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden">
-              <div className="p-6 bg-gradient-to-r from-blue-100 to-purple-50 border-b border-gray-100">
-             <div className="flex items-center gap-4">
-               <div className="flex-shrink-0 w-14 h-14 bg-white rounded-xl shadow-sm flex items-center justify-center">
-                 <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                   {day.date.split(' ')[1]}
-                 </span>
-               </div>
-               <div>
-                 <h3 className="text-xl font-semibold text-gray-900">
-                   {day.date.split(' ')[0]} {/* Month */}
-                   <span className="block text-lg text-gray-600 mt-1">
-                     {day.date.split(' ')[2]} {/* Year */}
-                   </span>
-                 </h3>
-               </div>
-             </div>
-           </div>
+      <div className="space-y-6">
+        {scheduleData.map((day) => {
+          const [month, dayNumber] = day.date.split(' ');
 
-                <div className="p-6 grid gap-4">
-                  {day.events.map((event, eventIndex) => (
-                    <div key={eventIndex} className="flex gap-4 p-4 rounded-xl bg-gray-50 hover:bg-white transition-colors">
-                      <div className="flex-shrink-0 w-14">
-                        <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center">
-                          <svg 
-                            className="w-6 h-6 text-purple-600" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            viewBox="0 0 24 24"
-                          >
-                            <path 
-                              strokeLinecap="round" 
-                              strokeLinejoin="round" 
-                              strokeWidth={2} 
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" 
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      
-                      <div className="flex-1">
-                        <h4 className="text-lg font-semibold text-gray-900 mb-1">{event.title}</h4>
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span className="px-2 py-1 bg-blue-50 text-blue-600 rounded-full">
+          return (
+            <section key={day.date} className="grid gap-5 md:grid-cols-[150px_1fr]">
+              <div className="flex items-start gap-3 md:block">
+                <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-xl bg-red-600 text-white shadow-sm">
+                  <span className="text-xs font-semibold uppercase tracking-wider">{month}</span>
+                  <span className="text-xl font-bold leading-5">{dayNumber}</span>
+                </div>
+                <div className="pt-1 md:pt-3">
+                  <h3 className="text-lg font-bold text-slate-900">{day.date}</h3>
+                  <p className="mt-1 text-sm text-slate-500">{day.events.length} scheduled event{day.events.length === 1 ? '' : 's'}</p>
+                </div>
+              </div>
+
+              <div className="relative space-y-3 border-l-2 border-red-100 pl-5">
+                {day.events.map((event) => (
+                  <article key={`${event.date}-${event.title}`} className="relative rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+                    <span className="absolute -left-[27px] top-7 h-3 w-3 rounded-full border-2 border-white bg-red-600 ring-1 ring-red-200" aria-hidden="true" />
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <h4 className="text-lg font-bold text-slate-900">{event.title}</h4>
+                        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600">
+                          <span className="inline-flex items-center gap-2">
+                            <Clock3 className="h-4 w-4 text-red-600" aria-hidden="true" />
                             {event.time}
+                          </span>
+                          <span className="inline-flex items-center gap-2">
+                            <MapPin className="h-4 w-4 text-red-600" aria-hidden="true" />
+                            {event.venue}
                           </span>
                         </div>
                       </div>
+                      <span className="w-fit rounded-full bg-red-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-red-700">
+                        On schedule
+                      </span>
                     </div>
-                  ))}
-                </div>
+                  </article>
+                ))}
               </div>
-            </div>
-          ))}
-        </div>
+            </section>
+          );
+        })}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Schedule;

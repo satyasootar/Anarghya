@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { eventData } from '../data/eventData';
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -74,7 +75,7 @@ const About = () => {
               variants={textVariants}
               className="text-4xl font-bold text-gray-900 mb-6"
             >
-              About Anarghya 2025
+              About {eventData.name} {eventData.year}
             </motion.h2>
 
             <motion.div
@@ -89,7 +90,7 @@ const About = () => {
                 This annual celebration brings together brilliant minds from across the state, fostering innovation, creativity, and technical excellence through a diverse range of competitions and events.
               </p>
               <p>
-                From coding challenges to creative presentations, Anarghya 2025 offers a platform for students to showcase their skills, learn from peers, and stay at the forefront of technological advancement.
+                From coding challenges to creative presentations, {eventData.name} {eventData.year} offers a platform for students to showcase their skills, learn from peers, and stay at the forefront of technological advancement.
               </p>
             </motion.div>
 
@@ -98,11 +99,7 @@ const About = () => {
               transition={{ delay: 0.6 }}
               className="mt-8 grid grid-cols-3 gap-6"
             >
-              {[
-                { number: "8+", label: "Events" },
-                { number: "500+", label: "Participants", delay: 0.1 },
-                { number: "50+", label: "Colleges", delay: 0.2 }
-              ].map((item, index) => (
+              {eventData.stats.map((item, index) => (
                 <motion.div
                   key={item.label}
                   initial="hidden"
