@@ -1,13 +1,16 @@
-import React from 'react';
-import { eventData } from '../data/eventData';
-
-type VolunteerYear = keyof typeof eventData.volunteers;
+import React, { useState } from 'react';
+import { useEventData } from '../context/EventDataContext';
 
 const Contact = () => {
-  const [activeYear, setActiveYear] = React.useState<VolunteerYear>('FourthYear');
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const { eventData } = useEventData();
+  const volunteerYears = Object.keys(eventData.volunteers || {});
+  const [activeYear, setActiveYear] = useState<string>('FourthYear');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredVolunteers = eventData.volunteers[activeYear].filter(volunteer =>
+  const currentYear = eventData.volunteers?.[activeYear] ? activeYear : (volunteerYears[0] || '');
+  const volunteersList = eventData.volunteers?.[currentYear] || [];
+
+  const filteredVolunteers = volunteersList.filter(volunteer =>
     volunteer.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     volunteer.phone.includes(searchQuery)
   );
@@ -24,12 +27,12 @@ const Contact = () => {
 
         {/* Year Selection Tabs */}
         <div className="flex flex-wrap gap-3 mb-8 justify-center">
-          {(Object.keys(eventData.volunteers) as VolunteerYear[]).map((year) => (
+          {volunteerYears.map((year) => (
             <button
               key={year}
               onClick={() => setActiveYear(year)}
               className={`px-5 py-2 rounded-full text-sm font-medium transition-colors
-                ${activeYear === year 
+                ${currentYear === year 
                   ? 'bg-indigo-600 text-white' 
                   : 'bg-white text-gray-600 hover:bg-gray-100'}`}
             >

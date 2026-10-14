@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { eventData } from '../data/eventData';
+import { useEventData } from '../context/EventDataContext';
 
 const Navbar = () => {
+  const { eventData } = useEventData();
   const [isOpen, setIsOpen] = useState(false);
 
   return (

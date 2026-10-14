@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { eventData } from '../data/eventData';
+import { useEventData } from '../context/EventDataContext';
 
 const Registration = () => {
+  const { eventData } = useEventData();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -96,7 +97,7 @@ const Registration = () => {
               required
             >
               <option value="">Select a competition</option>
-              {eventData.registration.competitions.map((competition) => (
+              {(eventData.registration?.competitions || []).map((competition) => (
                 <option key={competition.value} value={competition.value}>
                   {competition.label}
                 </option>

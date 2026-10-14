@@ -1,4 +1,6 @@
-export const eventData = {
+import { EventData } from '../types/event';
+
+export const fallbackEventData: EventData = {
     name: 'Anarghya',
     year: 2026,
     eventDate: '2026-10-24T10:00:00',
@@ -202,4 +204,6 @@ export const eventData = {
             }
         ]
     }
-} as const;
+};
+
+export const eventData = fallbackEventData;

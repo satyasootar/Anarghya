@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { motion, useScroll, useTransform, Variants, AnimatePresence } from 'framer-motion';
-import { eventData } from '../data/eventData';
+import { useEventData } from '../context/EventDataContext';
 
 const images = [
   'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1920',
@@ -32,9 +32,10 @@ const slideVariants: Variants = {
   exit: { x: '100%' }
 };
 
-const eventDate = new Date(eventData.eventDate).getTime();
-
 const Hero = () => {
+  const { eventData } = useEventData();
+  const eventDate = useMemo(() => new Date(eventData.eventDate).getTime(), [eventData.eventDate]);
+
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -58,7 +59,7 @@ const Hero = () => {
 
   const updateTimer = useCallback(() => {
     const now = new Date().getTime();
-    const distance = eventDate - now;
+    const distance = Math.max(0, eventDate - now);
     setTimeLeft({
       days: Math.floor(distance / (1000 * 60 * 60 * 24)),
       hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
@@ -68,6 +69,7 @@ const Hero = () => {
   }, [eventDate]);
 
   useEffect(() => {
+    updateTimer();
     const timer = setInterval(updateTimer, 1000);
     return () => clearInterval(timer);
   }, [updateTimer]);

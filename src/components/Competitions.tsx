@@ -1,5 +1,5 @@
 import { CalendarDays, Clock3, ExternalLink, MapPin, MessageCircle } from 'lucide-react';
-import { eventData } from '../data/eventData';
+import { useEventData } from '../context/EventDataContext';
 
 interface CompetitionCardProps {
   title: string;
@@ -79,6 +79,8 @@ const CompetitionCard: React.FC<CompetitionCardProps> = ({
 );
 
 const Competitions = () => {
+  const { eventData } = useEventData();
+
   return (
     <section className="py-16 bg-gray-50" id="competitions">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +94,7 @@ const Competitions = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {eventData.events.map((competition) => (
+          {(eventData.events || []).map((competition) => (
             <CompetitionCard key={competition.title} {...competition} />
           ))}
         </div>

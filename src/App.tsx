@@ -7,22 +7,25 @@ import Competitions from './components/Competitions';
 import Contact from './components/Contact';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import { EventDataProvider } from './context/EventDataContext';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Competitions />
-        <Schedule />
-        <Venue />
-        <Contact />
-        <FAQ />
-      </main>
-      <Footer />
-    </div>
+    <EventDataProvider>
+      <div className="min-h-screen bg-gray-50">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Competitions />
+          <Schedule />
+          <Venue />
+          <Contact />
+          <FAQ />
+        </main>
+        <Footer />
+      </div>
+    </EventDataProvider>
   );
 }
-export default App;
+export default App;

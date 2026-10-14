@@ -1,5 +1,6 @@
+import React, { useMemo } from 'react';
 import { CalendarDays, Clock3, MapPin } from 'lucide-react';
-import { eventData } from '../data/eventData';
+import { useEventData } from '../context/EventDataContext';
 
 type ScheduleEvent = {
   date: string;
@@ -8,45 +9,51 @@ type ScheduleEvent = {
   venue: string;
 };
 
-const scheduleData = eventData.events
-  .filter((event) => event.date && event.time)
-  .map((event): ScheduleEvent => ({
-    date: event.date,
-    time: event.time,
-    title: event.title,
-    venue: event.venue
-  }))
-  .reduce<Array<{ date: string; events: ScheduleEvent[] }>>((days, event) => {
-    const day = days.find((item) => item.date === event.date);
+const Schedule = () => {
+  const { eventData } = useEventData();
 
-    if (day) {
-      day.events.push(event);
-    } else {
-      days.push({ date: event.date, events: [event] });
-    }
+  const scheduleData = useMemo(() => {
+    return (eventData.events || [])
+      .filter((event) => event.date && event.time)
+      .map((event): ScheduleEvent => ({
+        date: event.date,
+        time: event.time,
+        title: event.title,
+        venue: event.venue
+      }))
+      .reduce<Array<{ date: string; events: ScheduleEvent[] }>>((days, event) => {
+        const day = days.find((item) => item.date === event.date);
 
-    return days;
-  }, [])
-  .sort((firstDay, secondDay) => Date.parse(firstDay.date) - Date.parse(secondDay.date));
+        if (day) {
+          day.events.push(event);
+        } else {
+          days.push({ date: event.date, events: [event] });
+        }
 
-const Schedule = () => (
-  <section className="bg-slate-50 py-20" id="schedule">
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div className="mb-12 flex flex-col gap-5 border-b border-slate-200 pb-8 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <div className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-red-600">
-            <CalendarDays className="h-4 w-4" aria-hidden="true" />
-            Plan your visit
+        return days;
+      }, [])
+      .sort((firstDay, secondDay) => Date.parse(firstDay.date) - Date.parse(secondDay.date));
+  }, [eventData.events]);
+
+  return (
+    <section className="bg-slate-50 py-20" id="schedule">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 flex flex-col gap-5 border-b border-slate-200 pb-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-red-600">
+              <CalendarDays className="h-4 w-4" aria-hidden="true" />
+              Plan your visit
+            </div>
+            <h2 className="text-4xl font-bold tracking-tight text-slate-900">Event Schedule</h2>
+            <p className="mt-3 max-w-xl text-base leading-7 text-slate-600">
+              {eventData.scheduleDateRange} · Technical and creative events
+            </p>
           </div>
-          <h2 className="text-4xl font-bold tracking-tight text-slate-900">Event Schedule</h2>
-          <p className="mt-3 max-w-xl text-base leading-7 text-slate-600">
-            {eventData.scheduleDateRange} · Technical and creative events
-          </p>
+          <div className="w-fit rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
+            {scheduleData.length} event days
+          </div>
         </div>
-        <div className="w-fit rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm">
-          {scheduleData.length} event days
-        </div>
-      </div>
+
 
       <div className="space-y-6">
         {scheduleData.map((day) => {
@@ -96,6 +103,7 @@ const Schedule = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Schedule;
